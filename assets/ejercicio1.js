@@ -1,38 +1,29 @@
+
 const form = document.querySelector("#formulario");
-    form.addEventListener("submit", login)
+const regExpLetras = /^[a-zA-Z]+$/gi
+const nombre = document.querySelector("#nombre");
+const errorN = document.querySelector(".errorNombre")
+const asunto = document.querySelector("#asunto");
+const errorA = document.querySelector(".errorAsunto")
+const mensaje = document.querySelector("#mensaje");
+const errorM = document.querySelector(".errorMensaje")
+const resultado = document.querySelector(".resultado")
 
-    function login (event){
-        event.preventDefault();
-
-        const nombre = document.querySelector("#nombre");
-        const asunto = document.querySelector("#asunto");
-        const mensaje = document.querySelector("#mensaje");
-        const errorN = document.querySelector(".errorNombre")
-        const errorA = document.querySelector(".errorAsunto")
-        const errorM = document.querySelector(".errorMensaje")
-        const resultado = document.querySelector(".resultado")
-        const expresiones =document.querySelector(".expresiones")
-
-        const regExpLetras = /^[a-zA-Z]+$/gi
-        
-        if(!nombre.value.trim()){
-            errorN.innerHTML = "El nombre es requerido."
-            return;
-        }
-        if (!asunto.value.trim()){
-            errorA.innerHTML = "El asunto es requerido"
-            return;
-        }
-        if(!mensaje.value.trim()){
-            errorM.innerHTML = "El mensaje es requerido"
-            return;
-        }else {
-            resultado.innerHTML = "Mensaje enviado con éxito !!!"
-            
-        }
-
-        if(!regExpLetras.test(nombre.value) || !regExpLetras.test(asunto.value) || !regExpLetras.test(mensaje.value)) {
-            return (expresiones.innerHTML = "Ingrese solo letras no números");
-            }
-           
-}
+form.addEventListener('submit' , (e) => {
+    e.preventDefault();
+    if(!regExpLetras.test(nombre.value)){
+        errorN.innerHTML = "El nombre es requerido. Ingrese solo caracteres alfabeticos"
+    }
+    if(!regExpLetras.test(asunto.value)){
+        errorA.innerHTML = "El asunto es requerido. Ingrese solo caracteres alfabeticos"
+    }
+    if(!regExpLetras.test(mensaje.value)){
+        errorM.innerHTML = "El mensaje es requerido. Ingrese solo caracteres alfabeticos"
+    }else{
+        resultado.innerHTML = "Mensaje enviado con exito"
+        errorN.innerHTML = " "
+        errorA.innerHTML = " "
+        errorM.innerHTML = " "
+    
+    }
+})
